@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "ts-node-dev src/index.ts",
+    "dev": "ts-node-dev src/dev/index.ts",
     "test": "jest --watchAll --no-cache"
   },
   "jest": {
@@ -33,7 +33,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
     "ts-node": "^9.0.0",
-    "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   },
   "devDependencies": {
@@ -42,6 +41,7 @@
     "jest": "^25.2.7",
     "mongodb-memory-server": "^6.5.1",
     "supertest": "^4.0.2",
-    "ts-jest": "^25.3.1"
+    "ts-jest": "^25.3.1",
+    "ts-node-dev": "^1.0.0-pre.44"
   }
 }

@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
+import cors from 'cors';
 import { errorHandler, NotFoundError } from '@sgtickets/common';
 
 import { currentUserRouter } from './routes/current-user';
@@ -18,7 +19,9 @@ app.use(
     secure: false, //process.env.NODE_ENV !== 'test',
   })
 );
-if(process.env.NODE_ENV === 'development')
+if(process.env.NODE_ENV === 'development'){
+  app.use(cors({ credentials: true, origin: "http://app.test.com:3000" }))
+}
 
 app.use(currentUserRouter);
 app.use(signinRouter);
