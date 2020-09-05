@@ -2,7 +2,6 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
-import cors  from 'cors';
 import { errorHandler, NotFoundError } from '@sgtickets/common';
 
 import { currentUserRouter } from './routes/current-user';
@@ -19,6 +18,7 @@ app.use(
     secure: false, //process.env.NODE_ENV !== 'test',
   })
 );
+if(process.env.NODE_ENV === 'development')
 
 app.use(currentUserRouter);
 app.use(signinRouter);
