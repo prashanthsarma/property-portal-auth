@@ -6,6 +6,11 @@ import { validateRequest, BadRequestError } from '@sgtickets/common';
 import { Password } from '../services/password';
 import { User } from '../models/user';
 
+interface ISignInRequestBody{
+  email: string;
+  password: string;
+}
+
 const router = express.Router();
 
 router.post(
@@ -19,7 +24,7 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body as ISignInRequestBody;
 
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
