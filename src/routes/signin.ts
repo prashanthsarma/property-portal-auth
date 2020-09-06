@@ -1,15 +1,12 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@sgtickets/common';
-
+import { validateRequest, BadRequestError } from '@prashanthsarma/property-portal-common';
+import { ISignInRequestBody } from '@prashanthsarma/property-portal-common/build/interfaces/auth';
 import { Password } from '../services/password';
 import { User } from '../models/user';
 
-interface ISignInRequestBody{
-  email: string;
-  password: string;
-}
+
 
 const router = express.Router();
 

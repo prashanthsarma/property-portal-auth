@@ -1,6 +1,8 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import { app } from '../app';
+import { User } from '../models/user';
+import { seedUserData } from '../_data/seedUsersData';
 
 
 
@@ -20,12 +22,14 @@ const start = async () => {
       useCreateIndex: true
     });
     console.log('Connected to MongoDb');
+    await User.create(seedUserData);
+    console.log('Imported seed data to MongoDb');
   } catch (err) {
     console.error(err);
   }
-  
-  app.listen(5000, () => {
-    console.log('Auth Dev listening on port 5000!');
+
+  app.listen(4000, 'app.test.com', () => {
+    console.log('Auth Dev listening on port 4000!');
   });
 };
 
