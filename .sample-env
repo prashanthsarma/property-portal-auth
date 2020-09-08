@@ -1,0 +1,4 @@
+GOOGLE_CLIENT=asdfasdf
+JWT_KEY=asdfasdf
+NODE_TLS_REJECT_UNAUTHORIZED=0
+NODE_ENV=development
