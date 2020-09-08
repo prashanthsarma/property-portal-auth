@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '@prashanthsarma/property-portal-common';
+import { validateRequest, BadRequestError, LoginMode } from '@prashanthsarma/property-portal-common';
 
 import { User } from '../models/user';
 
@@ -26,7 +26,7 @@ router.post(
       throw new BadRequestError('Email in use');
     }
 
-    const user = User.build({ email, password });
+    const user = User.build({ email, password, loginMode: LoginMode.manual });
     await user.save();
 
     // Generate JWT

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { Password } from '../services/password';
-import { IUserAttrs } from '@prashanthsarma/property-portal-common'
+import { IUserAttrs, LoginMode } from '@prashanthsarma/property-portal-common'
 
 // An interface that describes the properties
 // that a User Model has
@@ -13,6 +13,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 export interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
+  loginMode: LoginMode;
 }
 
 const userSchema = new mongoose.Schema(
@@ -23,7 +24,13 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true
+      required: true,
+      default: 'notset'
+    },
+    loginMode :{
+      type: String,
+      required: true,
+      default: LoginMode.manual
     }
   },
   {

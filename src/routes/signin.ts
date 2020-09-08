@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
 import { validateRequest, BadRequestError } from '@prashanthsarma/property-portal-common';
-import { ISignInRequestBody } from '@prashanthsarma/property-portal-common/build/interfaces/auth';
+import { ISignInRequestBody, LoginMode } from '@prashanthsarma/property-portal-common/build/interfaces/auth';
 import { Password } from '../services/password';
 import { User } from '../models/user';
+import { JWTHelper  } from '../services/jwtHelper';
 
 
 
@@ -23,7 +23,7 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, password } = req.body as ISignInRequestBody;
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email, loginMode:LoginMode.manual });
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');
     }
@@ -37,13 +37,7 @@ router.post(
     }
 
     // Generate JWT
-    const userJwt = jwt.sign(
-      {
-        id: existingUser.id,
-        email: existingUser.email,
-      },
-      process.env.JWT_KEY!
-    );
+    const userJwt = JWTHelper.generateUserJWT (existingUser)
 
     // Store it on session object
     req.session = {
