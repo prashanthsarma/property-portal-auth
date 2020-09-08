@@ -4,7 +4,7 @@ import { validateRequest, BadRequestError } from '@prashanthsarma/property-porta
 import { ISignInRequestBody, LoginMode } from '@prashanthsarma/property-portal-common/build/interfaces/auth';
 import { Password } from '../services/password';
 import { User } from '../models/user';
-import { JWTHelper  } from '../services/jwtHelper';
+import { JWTHelper } from '../services/jwtHelper';
 
 
 
@@ -23,7 +23,7 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, password } = req.body as ISignInRequestBody;
 
-    const existingUser = await User.findOne({ email, loginMode:LoginMode.manual });
+    const existingUser = await User.findOne({ email, loginMode: LoginMode.manual });
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');
     }
@@ -37,7 +37,7 @@ router.post(
     }
 
     // Generate JWT
-    const userJwt = JWTHelper.generateUserJWT (existingUser)
+    const userJwt = JWTHelper.generateUserJWT(existingUser)
 
     // Store it on session object
     req.session = {
