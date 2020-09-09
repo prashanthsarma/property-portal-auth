@@ -4,14 +4,13 @@ import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
 import { errorHandler, NotFoundError } from '@prashanthsarma/property-portal-common';
-import { logger } from '@prashanthsarma/property-portal-common/build/middlewares/logger';
 
-import { currentUserRouter } from './routes/current-user';
+import { currentUserRouter } from './routes/currentUser';
 import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
 import { resolveUserRouter } from './routes/resolve';
-import { verifyTokenRouter } from './routes/verifytoken';
+import { verifyTokenRouter } from './routes/verifyToken';
 
 const app = express();
 app.set('trust proxy', true);
