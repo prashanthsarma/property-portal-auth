@@ -38,6 +38,6 @@ app.all('*', async (req, res) => {
   throw new NotFoundError();
 });
 // app.use(logger);
-// app.use(errorHandler);
+app.use(errorHandler);
 
 export { app };
